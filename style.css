@@ -1,0 +1,123 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    background-color: rgb(56, 56, 56);
+}
+
+section {
+    width: 500px;
+    height: 600px;
+    background-color: rgb(41, 102, 216);
+    margin: 100px auto;
+    border-radius: 20px;
+}
+
+h1 {
+    padding-top: 30px;
+    text-align: center;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+}
+
+#calculadora {
+    background-color: black;
+    width: 285px;
+    margin: auto;
+    margin-top: 40px;
+    padding: 2px;
+    border-radius: 5px;
+}
+
+input[type="text"] {
+    width: 90%;
+    background-color: white;
+    
+    font-size: 2em;
+    text-align: right;
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: black;
+    color: white;
+    border: none;
+    outline: none;
+}
+
+div#caixa-txt {
+    width: 285px;
+    height: 50px;
+}
+
+#result_parcial {
+    color: rgba(255, 255, 255, 0.644);
+    background-color: black;
+    text-align: right;
+    padding: 5px;
+    font-family: Arial, Helvetica, sans-serif;
+    padding-right: 30px;
+}
+
+/* input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button{
+    -webkit-appearance: none;
+} */
+
+/* input[type="text"]::-webkit-rtl-ordering{
+    -webkit-appearance: none;
+} */
+
+button {
+    border-style: none;
+    padding: 15px;
+    border-radius: 5px;
+    margin: 2px;
+    color: white;
+    font-size: 17px;
+}
+
+button.func {
+    background-color: rgba(73, 73, 73, 0.644);
+}
+
+button.func:hover {
+    background-color:rgba(109, 109, 109, 0.644);
+}
+
+button.func:active {
+    background-color: rgba(73, 73, 73, 0.644);
+}
+
+button.val {
+    background-color: rgba(109, 109, 109, 0.644);
+}
+
+button.val:hover {
+    background-color: rgba(73, 73, 73, 0.644);
+}
+
+button.val:active {
+    background-color: rgba(51, 51, 51, 0.644);
+}
+
+button.espaco {
+    grid-column: span 2;
+}
+
+button#resultado {
+    background-color: rgb(110, 207, 207);
+    color: black;
+}
+
+button#resultado:hover {
+    background-color: rgba(110, 207, 207, 0.89);
+}
+
+button#resultado:active {
+    background-color: rgba(110, 207, 207, 0.644);
+}
+
+.opcoes {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+}

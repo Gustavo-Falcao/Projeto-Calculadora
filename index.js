@@ -20,6 +20,8 @@ let result = document.getElementById('resultado')
     input.value = valor_formatado.toLocaleString('pt-BR', {minimumFractionDigits: 2, maximumFractionDigits: 2});
 }); */
 
+let conta_parcial
+let caixa = document.querySelector('#result_parcial')
 
 window.onclick = function(elemento) {
     let elementoClicado = elemento.target;
@@ -27,8 +29,9 @@ window.onclick = function(elemento) {
     let conteudo = elementoClicado.textContent;
 
 
+
     if(!isNaN(conteudo)) {
-        if(input.value.length == 1 && input.value == '0') {
+        if((input.value.length == 1 && input.value == '0')) {
             input.value = conteudo
         } else {
             input.value += conteudo
@@ -38,90 +41,154 @@ window.onclick = function(elemento) {
     if(input.value.length > 3) {
         let str_formatada = input.value.replace(/\./g, "")//as barras são area de escape para o ponto pois ele é um caractere especial e g significa global para acessar todos os pontos da string;
         let input_number = Number(str_formatada)
-        input.value = input_number.toLocaleString('pt-BR');
+        mostrarValorFormatado(input_number.toLocaleString('pt-BR')) 
    }
 
     switch(idElemento) {
         case "divisao": 
-            mostraParcial(input.value += ' / ');
+            if(caixa.textContent.indexOf('=')) {
+                mostraParcial(input.value += ' / ', 1)
+            } else {
+                mostraParcial(input.value += ' / ');
+            }
         break;
         case "multiplicacao": 
-            mostraParcial(input.value += ' x ');
+            if(caixa.textContent.indexOf('=')) {
+                mostraParcial(input.value += ' x ', 1)
+            } else {
+                mostraParcial(input.value += ' x ');
+            }
         break;
         case "subtracao": 
-            mostraParcial(input.value += ' - ');
+            if(caixa.textContent.indexOf('=')) {
+                mostraParcial(input.value += ' - ', 1)
+            } else {
+                mostraParcial(input.value += ' - ');
+            }
         break;
         case "soma": 
-            mostraParcial(input.value += ' + ');
+            if(caixa.textContent.indexOf('=')) {
+                mostraParcial(input.value += ' + ', 1)
+            } else {
+                mostraParcial(input.value += ' + ');
+            }    
         break;
-        case "potencia": 
+/*         case "potencia": 
             mostraParcial(input.value += ' ** ');
-        break;
+        break; */
         case "resultado":
              mostraParcial(input.value += ' = ');
+            
+            let sinal = catchSign();
+            let posicao = caixa.textContent.indexOf(sinal)
+
+            console.log("Sinal: " + sinal)
+            console.log("Posição sinal: " + posicao)
+            console.log("Tamanho caixa: " + caixa.textContent.length)
+
+            switch(sinal) {
+                case '+': 
+                    let SumNum1 = catchNum1(0, posicao-1)
+                    let SumNum2 = catchNum2(posicao+1, caixa.textContent.length-2)
+                    let soma = SumNum1 + SumNum2
+                    input.value = soma
+                    //caixa.textContent += soma
+                    console.log("Soma dos valores: " + soma)
+                    console.log("Valor 1: " + SumNum1)
+                    console.log("Valor 2: " + SumNum2)
+                break;
+
+                case '-': 
+                    let SubNum1 = catchNum1(0, posicao-1)
+                    let SubNum2 = catchNum2(posicao+1, caixa.textContent.length-2)
+                    let sub = SubNum1 - SubNum2
+                    input.value = sub
+                    caixa.textContent += sub
+                break;
+
+                case '/': 
+                    let DivNum1 = catchNum1(0, posicao-1)
+                    let DivNum2 = catchNum2(posicao+1, caixa.textContent.length-2)
+                    let div = DivNum1 / DivNum2
+                    input.value = div
+                    caixa.textContent += div
+                break;
+
+                case 'x': 
+                    let MultNum1 = catchNum1(0, posicao-1)
+                    let MultNum2 = catchNum2(posicao+1, caixa.textContent.length-2)
+                    let mult = MultNum1 * MultNum2
+                    input.value = mult
+                    caixa.textContent += mult
+                break;
+
+                case '*':
+                    let PotNum1 = catchNum1(0, posicao-1)
+                    let PotNum2 = catchNum2(posicao+1, caixa.textContent.length-2)
+                    let pot = PotNum1 ** PotNum2
+                    input.value = pot
+                    caixa.textContent += pot
+                break;
+            }
+
         break;
     }
 
 }
 
-let caixa = document.querySelector('#result_parcial')
+function catchNum1(inicio, fim) {
+    return Number(caixa.textContent.slice(inicio, fim))
+}
 
-function mostraParcial(val_input) {
-    let novo_val = ""
-    let caractere
-    let reset = false
-    
-    caixa.textContent += val_input
-    console.log(caixa.textContent)
-    console.log(novo_val.length)
-    input.value = '0'
-    
-    //let index = val_input.length
-    //let caractere = val_input[index - 2]
-    /* switch(caractere) {
-        case '/': 
-    } */
-    
+function catchNum2(inicio, fim) {
+    return Number(caixa.textContent.slice(inicio, (fim)))
+}
+
+function catchSign() {
+    let carac;
+    for(let i = 0; i < caixa.textContent.length; i++) {
+       if(isNaN(caixa.textContent[i]) && caixa.textContent[i] != ' ') {
+           carac = caixa.textContent[i]
+           break;
+       }
+   }
+   return carac;
 }
 
 
-/* const numeros = ['zero', 'um', 'dois', 'tres', 'quatro', 'cinco', 'seis', 'sete', 'oito', 'nove']
-
-numeros.forEach((id, index) => {
-    document.getElementById(id).addEventListener('click', () => {
-        insereNum(index)
-    });
-}); */
-
-
-function verificaFuncaoClicada(str) {
-    let caractere_encontrado = false
-    for(let i in str) {
-        if(isNaN(str[i]) && str[i] != ' ') {
-            caractere_encontrado = true;
-            break;
-        }
+function mostraParcial(val_input, HaveEqual) {
+    if(HaveEqual == 1) {
+        caixa.textContent = val_input
+    } else {
+        caixa.textContent += val_input
     }
-
-    return caractere_encontrado;
+    input.value = '0'
 }
 
-function insereNum(num) {
-
-
-
-    /* if(input.value.length == 1 && input.value == '0') {
-        input.value = num
-    } else {
-        input.value += num
-    } */
-
-    /* if(verificaFuncaoClicada(caixa.textContent) || input.value == '0') {
-        input.value = num
-    } else {
-        input.value += num
-    }  */
+function Divisao(num1, num2) {
+    return Number(num1) / Number(num2);
 }
+
+function Multiplicacao(num1, num2) {
+    return Number(num1) * Number(num2);
+}
+
+function Subtracao(num1, num2) {
+    return Number(num1) - Number(num2);
+}
+
+function Soma(num1, num2) {
+    return Number(num1) + Number(num2);
+}
+
+function Potencia(num1, num2) {
+    return Number(num1) ** Number(num2);
+}
+
+function mostrarValorFormatado(valor) {
+    input.value = valor
+}
+
 
 
 limpar.addEventListener('click', () => {

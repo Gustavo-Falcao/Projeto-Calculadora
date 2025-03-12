@@ -1,0 +1,76 @@
+* {
+    padding: 0;
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+body {
+    background-color: rgb(56, 56, 56);
+}
+
+h1 {
+    text-align: center;
+}
+
+tr > td {
+    text-align: center;
+}
+
+section {
+    background-color: rgb(41, 102, 216);
+    padding: 10px;
+    width: 500px;
+    margin: 100px auto 0 auto;
+    border-radius: 10px;
+}
+
+.valores {
+    background-color: rgba(109, 109, 109, 0.644);
+    text-align: center;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+.funcoes {
+    background-color: rgba(73, 73, 73, 0.644);
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#tabela {
+    background-color: black;
+    color: white;
+    width: fit-content;
+    margin: 50px auto;
+    border-radius: 5px;
+}
+
+#resultado {
+    background-color: rgb(110, 207, 207);
+    border-radius: 5px;
+}
+
+td.ajuste {
+    width: 36.45px;    
+}
+
+input[type="text"] {
+    border: none;
+    width: 90%;
+    height: 50px;
+    text-align: right;
+    font-size: 2.5em;
+    background-color: black;
+    color: white;
+}
+
+td#res-parc {
+    text-align: right;
+    padding-right: 14px;
+    padding-top: 10px;
+    color: rgba(255, 255, 255, 0.589);
+}
+
+td#cont-text {
+    padding-top: 5px;
+}

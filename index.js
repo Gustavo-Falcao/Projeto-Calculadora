@@ -46,11 +46,24 @@ window.onclick = function(elemento) {
 
     switch(idElemento) {
         case "divisao": 
-            if(caixa.textContent.indexOf('=')) {
-                mostraParcial(input.value += ' / ', 1)
-            } else {
-                mostraParcial(input.value += ' / ');
-            }
+            if(haveTwoNumAndOneSing(caixa.textContent)) {
+                let sinal = catchSign()
+                let pos = caixa.textContent.indexOf(sinal)
+                let num1 = catchNum1(0, pos-1)
+                let num2 = catchNum2(pos+1, caixa.textContent.length)
+                let res
+                if(sinal == '+') {
+                    res = num1 + num2
+                    caixa.textContent = res + ' / '
+                }
+                console.log("FOI PARA O SEGUNDO!!")    
+            } else if(caixa.textContent.indexOf('=')) {
+                    mostraParcial(input.value += ' / ', 1)
+                    console.log("FOI PARA O PRIMEIRO!!")
+                } else {
+                    mostraParcial(input.value += ' / ');
+                    console.log("FOI PARA O TERCEIRO")
+                }
         break;
         case "multiplicacao": 
             if(caixa.textContent.indexOf('=')) {
@@ -133,6 +146,27 @@ window.onclick = function(elemento) {
 
         break;
     }
+
+}
+
+function haveTwoNumAndOneSing(textInput) {
+    let sinal;
+    let encontrado = false
+    
+    for(let char in textInput) {
+        if(isNaN(char) && char != ' ') {
+            sinal = char
+            break;
+        }
+    }
+
+    let posicaoChar = textInput.indexOf(sinal)
+
+    if(!isNaN(textInput[posicaoChar+2])) {
+        encontrado = true
+    }
+    
+    return encontrado
 
 }
 

@@ -10,3 +10,4 @@
 
 # A fazer
 ## Criar uma função para remover os pontos de milhar quando for converter a string para número, e quando o numero for maior ou igual que mil colocar os pontos de milhar quando for converter para string e mostrar na tela
+## Organizar o código
